@@ -1,0 +1,37 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class Timer : MonoBehaviour
+{
+    private int minutes; // тип данных int подходит для минут
+    private float seconds; // тип данных float подходит для секунд
+
+    private void Update()
+    {
+        UpdateSeconds();
+    }
+
+    private void UpdateSeconds()
+    {
+        seconds -= Time.deltaTime;
+
+        if (seconds <= 0)
+        {
+            if (minutes > 0)
+            {
+                seconds += 59;
+                minutes--;
+            }
+            else
+            {
+                RestartLevel();
+            }
+        }
+    }
+
+    private void RestartLevel()
+    {
+        // код перезапуска сцены
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+}
